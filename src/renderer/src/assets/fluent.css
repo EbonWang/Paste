@@ -1,0 +1,145 @@
+/* ==========================================================================
+   Paste — 设计令牌（Windows 11 / Fluent 2）
+   不透明 Mica 底色 + 卡片化列表，整体观感对齐系统原生应用
+   ========================================================================== */
+
+:root {
+  /* 字体：优先 Segoe UI Variable，回退到雅黑 */
+  --font-fluent:
+    'Segoe UI Variable Text', 'Segoe UI Variable Display', 'Segoe UI', system-ui, -apple-system,
+    'Microsoft YaHei UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+
+  /* Windows 11 圆角规范：控件 4px，卡片 6~8px */
+  --radius-control: 4px;
+  --radius-card: 6px;
+
+  /* 动效：Windows 11 标准减速曲线 */
+  --ease-fluent: cubic-bezier(0.1, 0.9, 0.2, 1);
+
+  /* ---- 浅色（Mica） ---- */
+  --bg-app: #f3f3f3; /* 应用背景（Mica 基底） */
+  --bg-surface: #ffffff; /* 卡片/输入控件表面 */
+  --bg-surface-hover: #f6f6f6;
+  --fill-subtle: #f0f0f0; /* 图标底衬 */
+
+  --stroke-default: #e0e0e0; /* 卡片描边 */
+  --stroke-hover: #d1d1d1;
+  --divider: #e5e5e5;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #5c5c5c;
+  --text-tertiary: #8a8a8a;
+
+  --accent: #0078d4; /* 系统强调色 */
+  --accent-soft: #e8f3fd; /* 选中项底纹 */
+
+  --tint-text: #616161;
+  --tint-files: #0078d4;
+  --tint-image: #8a53c9;
+
+  --scrollbar-thumb: #c2c2c2;
+  --scrollbar-thumb-hover: #a0a0a0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ---- 深色（Mica） ---- */
+    --bg-app: #202020;
+    --bg-surface: #2b2b2b;
+    --bg-surface-hover: #323232;
+    --fill-subtle: #383838;
+
+    --stroke-default: #3b3b3b;
+    --stroke-hover: #4a4a4a;
+    --divider: #333333;
+
+    --text-primary: #ffffff;
+    --text-secondary: #c5c5c5;
+    --text-tertiary: #9a9a9a;
+
+    --accent: #4cc2ff;
+    --accent-soft: #2f4453;
+
+    --tint-text: #adadad;
+    --tint-files: #4cc2ff;
+    --tint-image: #c39bea;
+
+    --scrollbar-thumb: #5c5c5c;
+    --scrollbar-thumb-hover: #7a7a7a;
+  }
+}
+
+/* ==========================================================================
+   基础重置
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg-app);
+  overflow: hidden;
+  font-family: var(--font-fluent);
+  font-size: 14px;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 桌面应用：禁用文本选中与拖拽，避免误操作 */
+  user-select: none;
+  cursor: default;
+}
+
+#app {
+  height: 100%;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: default;
+}
+
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+}
+
+input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* Windows 11 覆盖式滚动条：静止时隐藏，悬停时显现 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.scroller:hover::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
